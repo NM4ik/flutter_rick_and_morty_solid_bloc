@@ -11,7 +11,7 @@ class PersonEntity extends Equatable {
   final LocationEntity origin;
   final LocationEntity location;
   final String image;
-  final List<String> episode;
+  final List<dynamic> episode;
   final DateTime created;
 
   const PersonEntity(
@@ -25,7 +25,8 @@ class PersonEntity extends Equatable {
       required this.location,
       required this.image,
       required this.episode,
-      required this.created});
+      required this.created
+      });
 
   @override
   List<Object?> get props => [

@@ -6,12 +6,13 @@ import 'package:rick_and_morty_solid_bloc/feature/data/datasources/person_remote
 import 'package:rick_and_morty_solid_bloc/feature/data/repositories/person_repository_impl.dart';
 import 'package:rick_and_morty_solid_bloc/feature/domain/repositories/person_repository.dart';
 import 'package:rick_and_morty_solid_bloc/feature/domain/usecases/get_all_persons.dart';
+import 'package:rick_and_morty_solid_bloc/feature/domain/usecases/search_person.dart';
 import 'package:rick_and_morty_solid_bloc/feature/presentation/bloc/person_list_cubit/person_list_cubit.dart';
 import 'package:rick_and_morty_solid_bloc/feature/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-final sl = GetIt.instance;
+GetIt sl = GetIt.instance;
 
 Future<void> init() async {
   // Bloc & Cubit
@@ -20,7 +21,7 @@ Future<void> init() async {
 
   // UseCases
   sl.registerLazySingleton(() => GetAllPersons(personRepository: sl()));
-  sl.registerLazySingleton(() => SearchPersons(sl()));
+  sl.registerLazySingleton(() => SearchPerson(personRepository: sl()));
 
   // Repository
   sl.registerLazySingleton<PersonRepository>(() => PersonRepositoryImpl(

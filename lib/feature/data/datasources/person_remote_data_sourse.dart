@@ -23,7 +23,7 @@ class PersonRemoteDataSourceIpml implements PersonRemoteDataSourse {
 
   // https://rickandmortyapi.com/api/character/?name=rick as 2nd endpoint
   @override
-  Future<List<PersonModel>> searchPerson(String query) => _getPersonFromUrl('https://rickandmortyapi.com/api/character/?page=$query');
+  Future<List<PersonModel>> searchPerson(String query) => _getPersonFromUrl('https://rickandmortyapi.com/api/character/?name=$query');
 
   Future<List<PersonModel>> _getPersonFromUrl(String url) async {
     print(url);
@@ -33,7 +33,7 @@ class PersonRemoteDataSourceIpml implements PersonRemoteDataSourse {
 
     if (response.statusCode == 200) {
       final persons = json.decode(response.body);
-      return (persons['results'] as List)
+      return (persons['results'] as List<dynamic>)
           .map((e) => PersonModel.fromJson(e))
           .toList();
     } else {
